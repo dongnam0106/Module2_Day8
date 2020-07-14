@@ -2,6 +2,17 @@ package tennisgame;
 
 public class TennisGame {
 
+    public static final int ADVANTAGE = 4;
+    public static final String LOVE = "Love";
+    public static final String FIFTEEN = "Fifteen";
+    public static final String THIRTY = "Thirty";
+    public static final String FORTY = "Forty";
+    public static final String LOVE_ALL = "Love-All";
+    public static final String FIFTEEN_ALL = "Fifteen-All";
+    public static final String THIRTY_ALL = "Thirty-All";
+    public static final String FORTY_ALL = "Forty-All";
+    public static final String DEUCE = "Deuce";
+
     private static int scoreOfPlayer1, scoreOfPlayer2;
     private static int minusResult = scoreOfPlayer1 - scoreOfPlayer2;
     private static String score = "";
@@ -37,16 +48,16 @@ public class TennisGame {
             }
             switch (tempScore) {
                 case 0:
-                    show = "Love";
+                    show = LOVE;
                     break;
                 case 1:
-                    show = "Fifteen";
+                    show = FIFTEEN;
                     break;
                 case 2:
-                    show = "Thirty";
+                    show = THIRTY;
                     break;
                 case 3:
-                    show = "Forty";
+                    show = FORTY;
                     break;
             }
         }
@@ -74,26 +85,30 @@ public class TennisGame {
         if (scoreOfPlayer1 == scoreOfPlayer2) {
             switch (scoreOfPlayer1) {
                 case 0:
-                    score = "Love-All";
+                    score = LOVE_ALL;
                     break;
                 case 1:
-                    score = "Fifteen-All";
+                    score = FIFTEEN_ALL;
                     break;
                 case 2:
-                    score = "Thirty-All";
+                    score = THIRTY_ALL;
                     break;
                 case 3:
-                    score = "Forty-All";
+                    score = FORTY_ALL;
                     break;
                 default:
-                    score = "Deuce";
+                    score = DEUCE;
                     break;
 
             }
-        } else if (scoreOfPlayer1 >= 4 || scoreOfPlayer2 >= 4) {
-            getScoreThan4();
         } else {
-            getScorePoor4();
+            boolean isScoreOfPlayer1Than4 = scoreOfPlayer1 >= ADVANTAGE;
+            boolean isScoreOfPlayer2Than4 = scoreOfPlayer2 >= ADVANTAGE;
+            if (isScoreOfPlayer1Than4 || isScoreOfPlayer2Than4) {
+                getScoreThan4();
+            } else {
+                getScorePoor4();
+            }
         }
         return score;
     }
